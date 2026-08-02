@@ -21,4 +21,11 @@ jobs:
       - run: just bootstrap
       - run: just lint
       - run: just test
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: "1.9.38"
+
+      - name: Install TinyTeX
+        run: quarto install tinytex --no-prompt
       - run: just verify
