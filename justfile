@@ -26,6 +26,10 @@ required-cases: build
 experiments: build
     scripts/run-experiments.sh
 
+refresh-results: build
+    scripts/run-experiments.sh report
+    scripts/render-report.sh deliverables
+
 report:
     scripts/render-report.sh
 

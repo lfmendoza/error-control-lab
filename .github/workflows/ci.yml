@@ -21,5 +21,4 @@ jobs:
       - run: just bootstrap
       - run: just lint
       - run: just test
-      - run: just required-cases
-      - run: just experiments
+      - run: just verify

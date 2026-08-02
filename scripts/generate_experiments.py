@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import itertools
 import json
@@ -326,7 +327,15 @@ def generate_evidence() -> None:
         render_evidence_card(filename, title, message, algorithm, positions, result, frame)
 
 
-def main() -> None:
+def main(output_root: Path = ROOT) -> None:
+    global DATA, FIGURES, EVIDENCE, EVIDENCE_FIGURES
+    DATA = output_root / "data"
+    FIGURES = output_root / "figures"
+    EVIDENCE = output_root / "evidence"
+    EVIDENCE_FIGURES = FIGURES / "evidence"
+    DATA.mkdir(parents=True, exist_ok=True)
+    FIGURES.mkdir(parents=True, exist_ok=True)
+    EVIDENCE.mkdir(parents=True, exist_ok=True)
     rows = run_trials()
     write_csv(rows)
     make_figures(rows)
@@ -389,4 +398,11 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    cli = argparse.ArgumentParser(description="Ejecutar y publicar experimentos reproducibles")
+    cli.add_argument(
+        "--output-root",
+        type=Path,
+        default=ROOT / "report",
+        help="directorio que contiene data/, figures/ y evidence/",
+    )
+    main(cli.parse_args().output_root)
