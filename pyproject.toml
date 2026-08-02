@@ -1,0 +1,23 @@
+[project]
+name = "error-control-lab"
+version = "1.0.0"
+description = "Receptor y experimentos para detección y corrección de errores"
+requires-python = ">=3.13"
+dependencies = ["matplotlib>=3.10"]
+
+[dependency-groups]
+dev = ["pytest>=8.4", "ruff>=0.12"]
+
+[project.scripts]
+receiver = "error_control.receiver:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src/python"]
+testpaths = ["tests/python"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

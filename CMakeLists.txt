@@ -1,0 +1,33 @@
+cmake_minimum_required(VERSION 3.20)
+project(error_control_lab LANGUAGES CXX)
+
+option(ENABLE_SANITIZERS "Activar AddressSanitizer y UndefinedBehaviorSanitizer" OFF)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_library(error_control src/cpp/error_control.cpp)
+target_include_directories(error_control PUBLIC include)
+target_compile_options(error_control PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(error_control PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+  target_link_options(error_control PRIVATE -fsanitize=address,undefined)
+endif()
+
+add_executable(sender src/cpp/main.cpp)
+target_link_libraries(sender PRIVATE error_control)
+target_compile_options(sender PRIVATE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
+if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(sender PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+  target_link_options(sender PRIVATE -fsanitize=address,undefined)
+endif()
+
+enable_testing()
+add_executable(cpp_tests tests/cpp/test_error_control.cpp)
+target_link_libraries(cpp_tests PRIVATE error_control)
+if(ENABLE_SANITIZERS AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  target_compile_options(cpp_tests PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+  target_link_options(cpp_tests PRIVATE -fsanitize=address,undefined)
+endif()
+add_test(NAME cpp_unit COMMAND cpp_tests)

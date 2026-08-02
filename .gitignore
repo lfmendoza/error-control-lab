@@ -1,0 +1,15 @@
+.local/
+.venv/
+.cache/
+build/
+build-sanitize/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.quarto/
+report/_freeze/
+report/pdf-pages/
+report/Laboratorio_2_Redes_Luis_Fernando_Mendoza.html
+report/Laboratorio_2_Redes_Luis_Fernando_Mendoza.pdf
+*.log

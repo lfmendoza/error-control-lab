@@ -1,0 +1,60 @@
+{
+  "trials": 480,
+  "total_transmissions": 480,
+  "altered_transmissions": 234,
+  "false_negatives": 0,
+  "aggregate": {
+    "hamming": {
+      "total_transmissions": 240,
+      "altered_transmissions": 115,
+      "conditional_detection_rate": 1.0,
+      "recovery_rate": 0.7541666666666667,
+      "conditional_recovery_rate": 0.48695652173913045,
+      "conditional_false_negative_rate": 0.0,
+      "mean_encode_ns": 265286.2375,
+      "mean_decode_ns": 1534181.9125
+    },
+    "crc32": {
+      "total_transmissions": 240,
+      "altered_transmissions": 119,
+      "conditional_detection_rate": 1.0,
+      "recovery_rate": 0.5041666666666667,
+      "conditional_recovery_rate": 0.0,
+      "conditional_false_negative_rate": 0.0,
+      "mean_encode_ns": 57780.291666666664,
+      "mean_decode_ns": 689495.3
+    }
+  },
+  "limitations": {
+    "hamming_three_bit_miscorrection": {
+      "positions": [
+        0,
+        1,
+        3
+      ],
+      "result": {
+        "accepted": true,
+        "algorithm": "hamming",
+        "status": "corrected",
+        "detected_error": true,
+        "uncorrectable": false,
+        "block_statuses": [
+          "corrected_single"
+        ],
+        "corrected_positions": [
+          6
+        ],
+        "original_bits": 8,
+        "syndromes": [
+          7
+        ],
+        "recovered_bits": "01010001",
+        "message": "Q"
+      }
+    },
+    "crc_search": {
+      "patterns_checked": 102090,
+      "undetected": null
+    }
+  }
+}

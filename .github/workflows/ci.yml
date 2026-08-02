@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - uses: just-containers/install-action@v1
+      - name: Dependencias del sistema
+        run: sudo apt-get update && sudo apt-get install -y ninja-build shellcheck
+      - run: just bootstrap
+      - run: just lint
+      - run: just test
+      - run: just required-cases
+      - run: just experiments
