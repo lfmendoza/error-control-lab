@@ -11,7 +11,10 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.13"
-      - uses: just-containers/install-action@v1
+      - name: Install just
+        uses: extractions/setup-just@v3
+        with:
+          just-version: "1.57.0"
       - name: Dependencias del sistema
         run: sudo apt-get update && sudo apt-get install -y ninja-build shellcheck
       - run: just bootstrap
