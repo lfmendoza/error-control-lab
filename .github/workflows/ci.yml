@@ -23,6 +23,7 @@ jobs:
             cmake \
             ninja-build \
             poppler-utils \
+            ripgrep \
             shellcheck
       - run: just bootstrap
       - run: just lint
