@@ -17,7 +17,13 @@ jobs:
         with:
           just-version: "1.57.0"
       - name: Dependencias del sistema
-        run: sudo apt-get update && sudo apt-get install -y ninja-build shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            ninja-build \
+            poppler-utils \
+            shellcheck
       - run: just bootstrap
       - run: just lint
       - run: just test
