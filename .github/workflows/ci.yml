@@ -35,4 +35,11 @@ jobs:
 
       - name: Install TinyTeX
         run: quarto install tinytex --no-prompt
+      - name: Ensure ripgrep is available to verify
+        run: |
+          command -v rg >/dev/null || {
+            sudo apt-get update
+            sudo apt-get install -y ripgrep
+          }
+          rg --version
       - run: just verify
